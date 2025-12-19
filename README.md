@@ -59,6 +59,7 @@ Principales pasos realizados:
 ### 🔹 Distribución del Churn
 Visualización de la proporción de clientes que permanecen vs los que se van.
 
+<img width="500" height="600" alt="Distribucion_de_Abandono1" src="https://github.com/user-attachments/assets/15cb110b-3bee-4f40-b701-36cc2c6d40a9" />
 
 
 ---
@@ -66,6 +67,7 @@ Visualización de la proporción de clientes que permanecen vs los que se van.
 ### 🔹 Cargos Mensuales vs Churn
 Comparación del gasto mensual entre clientes que se quedan y los que abandonan el servicio.
 
+<img width="500" height="600" alt="cargos_mensuales_vs_churn" src="https://github.com/user-attachments/assets/fb84b1e5-d24a-44e3-aa48-3058767c1e4d" />
 
 
 **Insight clave:**  
@@ -76,6 +78,7 @@ Los clientes con **cargos mensuales más altos muestran una mayor tasa de churn*
 ### 🔹 Cuenta Diaria vs Churn
 Análisis del gasto diario promedio y su relación con la evasión.
 
+<img width="500" height="620" alt="Cargo Diario vs churn" src="https://github.com/user-attachments/assets/a8d9da89-8887-437d-96d5-fa6d2e7258dd" />
 
 
 Esto permite interpretar el impacto del precio desde una perspectiva más intuitiva para el cliente.
@@ -85,6 +88,7 @@ Esto permite interpretar el impacto del precio desde una perspectiva más intuit
 ### 🔹 Churn por Grupos de Permanencia
 Segmentación de clientes según su tiempo en la empresa.
 
+<img width="600" height="300" alt="tiempo_vs_churn" src="https://github.com/user-attachments/assets/0c054aea-caa2-4f5d-9982-0c2537b211cd" />
 
 
 **Insight clave:**  
