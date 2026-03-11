@@ -1,135 +1,135 @@
-# 📊 TelecomX LATAM – Customer Churn Analysis
+# 📊 TelecomX - Análisis de Cancelación de Clientes (Churn)
 
-Este proyecto analiza la **evasión de clientes (Churn)** en una empresa ficticia de telecomunicaciones en Latinoamérica, utilizando **Python y análisis exploratorio de datos (EDA)** para identificar los factores más relacionados con la cancelación del servicio.
+## 📌 Descripción del proyecto
 
----
+TelecomX es una empresa de telecomunicaciones que actualmente enfrenta un problema relacionado con la cancelación de sus servicios por parte de los clientes.
 
-## 🎯 Objetivo del Proyecto
+El objetivo de este proyecto es analizar los datos disponibles para identificar posibles factores que estén influyendo en el abandono del servicio (Churn) y generar insights que permitan tomar decisiones estratégicas para reducir la pérdida de clientes.
 
-Identificar patrones y variables clave que influyen en la evasión de clientes, respondiendo preguntas como:
-
-- ¿Los clientes que pagan más tienden a irse más?
-- ¿El tiempo de permanencia (tenure) reduce el churn?
-- ¿La cantidad de servicios contratados impacta la probabilidad de evasión?
-- ¿Existe relación entre el gasto diario y el churn?
-
-Este análisis sirve como base para futuros **modelos predictivos de churn**.
+El análisis se realizó utilizando Python en un notebook de Google Colab, aplicando técnicas de limpieza de datos, transformación y análisis exploratorio.
 
 ---
 
-## 🧰 Tecnologías Utilizadas
+# 🗂 Estructura del proyecto
 
-- Python 🐍
+El proyecto se compone de los siguientes archivos:
+
+- TelecomX_LATAM.ipynb → Notebook con todo el análisis del proyecto
+- TelecomX_Data.json → Base de datos utilizada para el análisis
+- Gráficos generados → Visualizaciones utilizadas para el análisis exploratorio
+
+---
+
+# 🛠 Tecnologías utilizadas
+
+Las principales herramientas utilizadas fueron:
+
+- Python
 - Pandas
+- NumPy
 - Matplotlib
-- GoogleColab
+- Google Colab
 
 ---
 
-## 📂 Dataset
+# 📥 Extracción de datos
 
-El dataset (`TelecomX_Data.json`) contiene información de clientes, incluyendo:
+Primero se cargó la base de datos en formato JSON dentro del notebook utilizando la librería Pandas.
 
-- Información demográfica
-- Servicios contratados
-- Tipo de contrato
-- Cargos mensuales y totales
-- Estado de churn (Yes / No)
+Se utilizó la función `pd.read_json()` para cargar la información.
 
-El archivo original tiene una **estructura anidada en JSON**, que fue normalizada usando `pd.json_normalize()`.
+Debido a que los datos contenían estructuras anidadas dentro de diccionarios, fue necesario normalizar la base de datos utilizando `pd.json_normalize()` para transformar los datos en un formato tabular que permitiera su análisis.
 
 ---
 
-## 🧹 Limpieza y Preparación de Datos
+# 🔧 Limpieza y transformación de datos
 
-Principales pasos realizados:
+Durante esta etapa se realizaron varias tareas importantes:
 
-- Normalización del JSON a un DataFrame plano
-- Conversión de variables categóricas (`Yes` / `No`) a booleanos
-- Conversión de cargos totales a tipo numérico
-- Creación de nuevas variables:
-  - **Cuenta diaria** (`Monthly / 30`)
-  - **Grupos de permanencia (tenure_group)**
-  - **Cantidad de servicios contratados**
+- Revisión de la estructura de la base de datos
+- Identificación de valores nulos
+- Cambio de nombres de columnas para facilitar su manipulación
+- Eliminación de registros con valores vacíos en columnas importantes
+- Conversión de variables categóricas
+- Creación de nuevas variables para el análisis
 
----
+Primero se revisó la información general del dataset utilizando `df.info()` para conocer los tipos de datos y detectar valores nulos.
 
-## 📈 Análisis Exploratorio (EDA)
+Posteriormente se renombraron varias columnas para facilitar su manejo dentro del análisis.
 
-### 🔹 Distribución del Churn
-Visualización de la proporción de clientes que permanecen vs los que se van.
+Durante la revisión se detectaron valores vacíos en las columnas **Churn** y **Total**, por lo que se eliminaron estos registros para evitar problemas en el análisis.
 
-<img width="500" height="600" alt="Distribucion_de_Abandono1" src="https://github.com/user-attachments/assets/15cb110b-3bee-4f40-b701-36cc2c6d40a9" />
+Luego se creó una nueva variable llamada **Cuentas_Diarias**, que representa el costo diario del servicio de cada cliente.
 
+Esta variable se calculó dividiendo el cargo mensual entre 30 días.
 
----
-
-### 🔹 Cargos Mensuales vs Churn
-Comparación del gasto mensual entre clientes que se quedan y los que abandonan el servicio.
-
-<img width="500" height="600" alt="cargos_mensuales_vs_churn" src="https://github.com/user-attachments/assets/fb84b1e5-d24a-44e3-aa48-3058767c1e4d" />
-
-
-**Insight clave:**  
-Los clientes con **cargos mensuales más altos muestran una mayor tasa de churn**.
+También se convirtieron varias variables categóricas que contenían valores **Yes / No** en valores booleanos para facilitar su análisis.
 
 ---
 
-### 🔹 Cuenta Diaria vs Churn
-Análisis del gasto diario promedio y su relación con la evasión.
+# 📊 Análisis exploratorio de datos (EDA)
 
-<img width="500" height="620" alt="Cargo Diario vs churn" src="https://github.com/user-attachments/assets/a8d9da89-8887-437d-96d5-fa6d2e7258dd" />
+En esta etapa se realizaron diferentes análisis para identificar patrones relacionados con el churn.
 
+Primero se obtuvieron estadísticas descriptivas utilizando `df.describe()`.
 
-Esto permite interpretar el impacto del precio desde una perspectiva más intuitiva para el cliente.
+Posteriormente se generó un gráfico de distribución del churn que permitió identificar qué proporción de clientes cancela el servicio.
 
----
+El análisis mostró que aproximadamente **26.6% de los clientes han cancelado el servicio**, mientras que el resto continúa activo.
 
-### 🔹 Churn por Grupos de Permanencia
-Segmentación de clientes según su tiempo en la empresa.
+Luego se realizaron diferentes agrupaciones utilizando `groupby` para analizar la relación entre el churn y distintas variables como:
 
-<img width="600" height="300" alt="tiempo_vs_churn" src="https://github.com/user-attachments/assets/0c054aea-caa2-4f5d-9982-0c2537b211cd" />
+- Partner
+- SeniorCitizen
+- Gender
+- Dependents
+- InternetService
+- Contract
+- PaymentMethod
 
+También se realizaron varias visualizaciones para entender mejor el comportamiento de los datos.
 
-**Insight clave:**  
-Los clientes con menor tenure (0–12 meses) presentan mayor probabilidad de churn.
+Entre los gráficos generados se encuentran:
 
----
+- Distribución de churn
+- Boxplot de cargos mensuales vs churn
+- Cargos mensuales vs tiempo de permanencia
+- Tiempo de permanencia vs churn
 
-### 🔹 Correlación entre Variables
-Matriz de correlación para identificar relaciones lineales entre variables numéricas.
-
-
-
-Variables analizadas:
-- Churn (binario)
-- Cargo mensual
-- Cargo diario
-- Tenure
-- Número de servicios
+Estos análisis permitieron identificar patrones importantes relacionados con el abandono del servicio.
 
 ---
 
-## 📌 Principales Conclusiones
+# 🔎 Principales hallazgos
 
-- 📉 **Mayor gasto mensual y diario está asociado a mayor churn**
-- ⏳ **Clientes con menor antigüedad son más propensos a irse**
-- 📦 **Mayor cantidad de servicios contratados reduce la evasión**
-- 📊 La correlación directa con churn es moderada, lo que sugiere que un **modelo multivariable** sería más efectivo
+A partir del análisis se identificaron varios factores relacionados con la cancelación del servicio.
 
----
+Los clientes con **cargos mensuales más altos** presentan mayor probabilidad de cancelar el servicio.
 
-## 🚀 Próximos Pasos
+También se observó que los clientes con **mayor tiempo en la empresa** tienen menor probabilidad de abandonar el servicio, lo que indica que la fidelización es un factor importante para la retención.
 
-- Implementar modelos predictivos:
-  - Regresión logística
-  - Random Forest
-- Feature engineering avanzado
-- Evaluación con métricas de clasificación (ROC, F1-score)
+Otro hallazgo importante es que los clientes con **mayor número de servicios contratados** tienen menor probabilidad de cancelar, lo que sugiere que la integración del cliente con múltiples servicios reduce el churn.
 
 ---
 
-## 👤 Autor
+# 💡 Recomendaciones
+
+A partir de los resultados obtenidos se pueden plantear varias estrategias para reducir el churn:
+
+- Implementar estrategias de fidelización durante los primeros meses del cliente.
+- Analizar la estructura de precios para evitar que cargos elevados generen cancelaciones.
+- Incentivar la contratación de múltiples servicios dentro de la empresa.
+- Desarrollar programas de retención enfocados en clientes con alto riesgo de abandono.
+
+---
+
+# 📈 Conclusión
+
+El análisis exploratorio permitió identificar varios factores que influyen en la cancelación del servicio.
+
+Los resultados obtenidos pueden servir como base para futuros análisis más avanzados, como el desarrollo de modelos predictivos que permitan anticipar qué clientes tienen mayor probabilidad de abandonar el servicio y así implementar estrategias de retención más efectivas.
+df = pd.read_json('TelecomX_Data.json')
+
 
 **Sebastián Ospina**  
 Analista de Datos | Ingeniero Industrial | Python | Pandas | EDA
